@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naturéa — Nature. Pure. You.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#8B6914;--gold-mid:#A07820;--gold-light:#C9A84C;--gold-bright:#E8C97A;
+  --cream:#F7F3EC;--cream-dark:#EDE5D4;--cream-mid:#F2ECE0;
+  --dark:#1A1A1A;--dark-mid:#2C2C2C;--muted:#6B6B6B;--muted-light:#9A9A9A;
+  --forest-dark:#1C2B1C;--ocean-dark:#0A1628;--purple-dark:#1A0A28;
+  --border-light:rgba(139,105,20,0.2);--border-cream:rgba(139,105,20,0.15);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--dark);overflow-x:hidden}
+ 
+/* ─── CURSOR ─── */
+.cur{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .3s}
+.cur-r{position:fixed;width:28px;height:28px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s ease;opacity:.5}
+ 
+/* ─── LOADER ─── */
+#loader{position:fixed;inset:0;background:var(--cream);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .7s ease,visibility .7s ease}
+#loader.out{opacity:0;visibility:hidden}
+.ld-logo{font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--gold);letter-spacing:.12em;margin-bottom:2rem}
+.ld-bar{width:180px;height:1.5px;background:rgba(139,105,20,.2);overflow:hidden}
+.ld-fill{height:100%;background:var(--gold);width:0;transition:width .05s linear}
+.ld-sub{font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:.9rem}
+ 
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;transition:all .4s ease;background:transparent}
+nav.solid{background:rgba(247,243,236,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-cream);box-shadow:0 2px 20px rgba(0,0,0,.04)}
+.nav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none}
+.nav-logo-icon{width:28px;height:28px}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1}
+.nav-logo-name{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--dark);letter-spacing:.05em}
+.nav-logo-tag{font-family:'DM Sans',sans-serif;font-size:.6rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
+.nav-links a{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.08em;color:var(--dark-mid);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:1.2rem}
+.btn-quote{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--dark);color:#fff;padding:.6rem 1.4rem;border:none;cursor:pointer;transition:background .3s;border-radius:2px}
+.btn-quote:hover{background:var(--gold)}
+.nav-menu-icon{display:none;background:none;border:none;cursor:pointer;padding:.3rem}
+ 
+/* ─── HERO ─── */
+.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;overflow:hidden;background:var(--cream-mid)}
+.hero-bg{
+  position:absolute;
+  inset:0;
+
+  background-image:url('images/dev.jpg');
+  background-size: 100% 100%;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+@keyframes splash{0%,100%{opacity:0;transform:scale(0)}40%{opacity:.7}70%{opacity:0;transform:scale(1) translateY(-30px)}}
+.hero-content{position:relative;z-index:10;padding:0 2.5rem;max-width:52%;padding-top:5rem}
+.hero-eyebrow{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;animation:fade-up .8s ease .3s both}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:900;line-height:1.05;color:var(--dark);margin-bottom:1.2rem;animation:fade-up .8s ease .5s both}
+.hero-title span{color:var(--gold-mid);font-style:italic}
+.hero-desc{font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--muted);line-height:1.75;max-width:420px;margin-bottom:2.2rem;animation:fade-up .8s ease .7s both}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fade-up .8s ease .9s both}
+.btn-dark{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--dark);color:#fff;padding:.85rem 2rem;border:none;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:.6rem;border-radius:2px}
+.btn-dark:hover{background:var(--gold-mid)}
+.btn-dark .arr{transition:transform .3s}
+.btn-dark:hover .arr{transform:translateX(4px)}
+.hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border-top:1px solid var(--border-cream);display:grid;grid-template-columns:repeat(4,1fr)}
+.hb-item{padding:1.2rem 1.8rem;display:flex;flex-direction:column;gap:.3rem;border-right:1px solid var(--border-cream)}
+.hb-item:last-child{border-right:none}
+.hb-label{font-family:'Syne',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hb-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold-mid)}
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+ 
+/* ─── SECTIONS SHARED ─── */
+.sec-eyebrow{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;color:var(--dark)}
+.sec-title em{font-style:italic;color:var(--gold-mid)}
+.sec-title span{color:var(--gold-mid)}
+.divider{display:flex;align-items:center;gap:.8rem;margin:.8rem 0 .5rem}
+.divider-line{width:30px;height:1px;background:var(--gold-light)}
+.divider-icon{color:var(--gold-light);font-size:.9rem}
+.anim{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.anim.vis{opacity:1;transform:none}
+ 
+/* ─── PRODUCTS SECTION ─── */
+.products-sec{padding:6rem 2.5rem;background:#fff}
+.products-header{text-align:center;margin-bottom:.6rem}
+.products-sub{font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--muted);font-style:italic;margin-top:.5rem}
+.products-divider{display:flex;align-items:center;justify-content:center;gap:.8rem;margin:1rem 0 3.5rem}
+.products-divider span{color:var(--gold-light);font-size:1rem}
+.products-divider-line{width:40px;height:1px;background:var(--gold-light)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.prod-card{border-radius:14px;overflow:hidden;border:1px solid var(--border-cream);cursor:pointer;transition:transform .4s ease,box-shadow .4s ease;position:relative}
+.prod-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.12)}
+.prod-card-img{height:280px;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:space-between;padding:1.2rem}
+.prod-img-bg{position:absolute;inset:0;transition:transform .5s ease}
+.prod-card:hover .prod-img-bg{transform:scale(1.05)}
+.prod-badge{position:relative;z-index:2;font-family:'Syne',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;background:rgba(255,255,255,.9);color:var(--dark);padding:.3rem .8rem;border-radius:30px}
+.prod-icon-badge{position:relative;z-index:2;width:38px;height:38px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.prod-card-body{padding:1.5rem;background:#fff}
+.prod-card-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--dark);margin-bottom:.6rem}
+.prod-card-desc{font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem}
+.btn-learn-more{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:none;border:1.5px solid var(--dark);color:var(--dark);padding:.55rem 1.3rem;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem;border-radius:2px}
+.btn-learn-more:hover{background:var(--dark);color:#fff}
+.btn-learn-more .arr{transition:transform .3s}
+.btn-learn-more:hover .arr{transform:translateX(3px)}
+.chit-bg{background:linear-gradient(160deg,#1a3a5c 0%,#1d6b8a 40%,#2a9aaa 100%)}
+.mango-bg{background:linear-gradient(160deg,#7a4a00 0%,#c47800 40%,#e8aa20 100%)}
+.kokum-bg{background:linear-gradient(160deg,#3a1228 0%,#6b2854 40%,#9a4a70 100%)}
+ 
+/* ─── WHY CHOOSE ─── */
+.why-sec{padding:5rem 2.5rem;background:var(--cream-mid);position:relative;overflow:hidden}
+.why-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.why-features{display:flex;flex-direction:column;gap:2rem}
+.why-item{display:flex;gap:1.2rem;align-items:flex-start}
+.why-icon{width:44px;height:44px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;box-shadow:0 4px 16px rgba(139,105,20,.12)}
+.why-title{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);margin-bottom:.3rem}
+.why-text{font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--muted);line-height:1.65}
+.why-right{display:flex;flex-direction:column;gap:1.5rem}
+.why-globe{background:#fff;border-radius:16px;padding:2.5rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.06);margin-bottom:1rem}
+.globe-emoji{font-size:5rem;display:block;margin-bottom:1rem;animation:spin-globe 8s linear infinite}
+@keyframes spin-globe{0%,100%{transform:rotateY(0)}50%{transform:rotateY(180deg)}}
+.globe-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--dark)}
+.globe-sub{font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--muted)}
+.why-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.stat{background:#fff;border-radius:12px;padding:1.2rem 1rem;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.05)}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--gold-mid);line-height:1}
+.stat-lbl{font-family:'DM Sans',sans-serif;font-size:.72rem;color:var(--muted);margin-top:.3rem}
+ 
+/* ─── ABOUT ─── */
+.about-sec{padding:5rem 2.5rem;background:var(--forest-dark);color:#fff;position:relative;overflow:hidden}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:start}
+.about-left h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:1rem}
+.about-left p{font-family:'DM Sans',sans-serif;font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:1.5rem}
+.btn-about{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:#2a6b3a;color:#fff;padding:.7rem 1.6rem;border:none;cursor:pointer;transition:background .3s;border-radius:2px;display:inline-flex;align-items:center;gap:.5rem}
+.btn-about:hover{background:#3a8a4a}
+.about-right{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.ab-stat{text-align:center;padding:1.5rem .5rem}
+.ab-icon{font-size:1.6rem;margin-bottom:.7rem}
+.ab-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:#4CAF50;line-height:1}
+.ab-lbl{font-family:'DM Sans',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5);margin-top:.3rem}
+ 
+/* ─── PRODUCT PAGE HERO (fullscreen exactly like reference) ─── */
+.prod-page{display:none;position:fixed;inset:0;z-index:5000;overflow-y:auto;background:#fff}
+.prod-page.open{display:block}
+.prod-page-nav{position:sticky;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:rgba(247,243,236,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-cream)}
+.pp-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dark);letter-spacing:.05em}
+.pp-nav-links{display:flex;gap:2rem;list-style:none}
+.pp-nav-links a{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.08em;color:var(--dark-mid);text-decoration:none}
+.pp-right{display:flex;align-items:center;gap:1rem}
+.btn-pp-login{font-family:'Syne',sans-serif;font-size:.72rem;color:var(--muted);background:none;border:none;cursor:pointer}
+.btn-pp-signup{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.08em;background:var(--dark);color:#fff;padding:.45rem 1.1rem;border:none;cursor:pointer;border-radius:3px}
+.btn-close-pp{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;background:rgba(139,105,20,.1);color:var(--gold);border:none;cursor:pointer;padding:.4rem .9rem;border-radius:3px;transition:background .3s}
+.btn-close-pp:hover{background:rgba(139,105,20,.2)}
+ 
+/* fullscreen hero like images 1,2,3 */
+.pp-hero{position:relative;height:100vh;min-height:560px;overflow:hidden;display:flex;align-items:stretch}
+.pp-hero-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+
+.hero-video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  top:0;
+  left:0;
+}
+.pp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.35) 0%,rgba(0,0,0,.05) 50%,transparent 100%)}
+.pp-hero-bottom-fade{position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,rgba(247,243,236,1) 0%,transparent 100%)}
+.pp-hero-left{position:relative;z-index:10;display:flex;flex-direction:column;justify-content:flex-end;padding:3.5rem 3rem 6rem;max-width:420px}
+.pp-sparkles{position:absolute;inset:0;pointer-events:none;z-index:5}
+.sparkle{position:absolute;animation:sparkle-anim 2.5s ease-in-out infinite}
+@keyframes sparkle-anim{0%,100%{opacity:0;transform:scale(0) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+.pp-hero-bigtext{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;width:100%;text-align:right;padding-right:3%;pointer-events:none}
+.pp-bigname{font-family:'Playfair Display',serif;font-weight:900;text-transform:uppercase;color:rgba(165,132,60,.55);white-space:nowrap;line-height:.85;letter-spacing:-.02em}
+.pp-india-map{position:absolute;right:4%;top:50%;transform:translateY(-70%);z-index:4;opacity:.85}
+.pp-india-svg path{stroke:rgba(255,255,255,.7);stroke-width:1;fill:none}
+.pp-map-label{position:absolute;right:calc(4% + 40px);top:50%;transform:translateY(-120%);font-family:'DM Sans',sans-serif;font-size:.8rem;color:rgba(255,255,255,.85);text-align:right;line-height:1.5}
+.pp-hero-desc{font-family:'DM Sans',sans-serif;font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:1.5rem}
+.btn-discover{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;background:#fff;color:var(--dark);padding:.75rem 1.8rem;border:none;cursor:pointer;border-radius:30px;transition:background .3s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-discover:hover{background:var(--cream)}
+.pp-info-bar{position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:20;display:flex;background:rgba(247,243,236,.85);backdrop-filter:blur(12px);border-radius:40px;overflow:hidden;border:1px solid rgba(139,105,20,.2)}
+.pp-info-item{padding:.9rem 2.2rem;text-align:center;border-right:1px solid rgba(139,105,20,.2)}
+.pp-info-item:last-child{border-right:none}
+.pp-info-label{font-family:'Syne',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);display:block;margin-bottom:.2rem}
+.pp-info-val{font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--muted)}
+.pp-story{padding:5rem 2.5rem;max-width:1100px;margin:0 auto}
+.pp-story-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--dark);margin-bottom:.6rem}
+.pp-story-title em{font-style:italic;color:var(--gold-mid)}
+.story-steps{display:flex;flex-direction:column;gap:3.5rem;margin-top:3rem}
+.story-step{display:grid;grid-template-columns:80px 1fr 1fr;gap:2.5rem;align-items:center}
+.story-step.rev{grid-template-columns:80px 1fr 1fr}
+.step-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:700;color:var(--gold-light);line-height:1;opacity:.5}
+.step-text h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:.6rem}
+.step-text h3 em{font-style:italic;color:var(--gold-mid)}
+.step-text p{font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--muted);line-height:1.75}
+.step-visual{height:180px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
+.pp-benefits{padding:4rem 2.5rem;background:var(--cream-mid)}
+.pp-benefits-inner{max-width:1100px;margin:0 auto}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.ben-card{background:#fff;border-radius:12px;padding:1.5rem;border:1px solid var(--border-cream);transition:all .3s}
+.ben-card:hover{box-shadow:0 8px 30px rgba(139,105,20,.1);border-color:var(--gold-light)}
+.ben-icon{font-size:1.6rem;margin-bottom:.7rem}
+.ben-title{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);margin-bottom:.4rem}
+.ben-text{font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--muted);line-height:1.6}
+ 
+/* ─── SUSTAINABILITY ─── */
+.sus-sec{padding:5rem 2.5rem;background:#fff}
+.sus-inner{max-width:1100px;margin:0 auto}
+.sus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem}
+.sus-card{text-align:center;padding:2rem 1rem}
+.sus-icon{font-size:2rem;display:block;margin-bottom:1rem}
+.sus-name{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);margin-bottom:.5rem}
+.sus-text{font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--muted);line-height:1.6}
+ 
+/* ─── CONTACT ─── */
+.contact-sec{padding:5rem 2.5rem;background:var(--cream-mid)}
+.contact-inner{max-width:700px;margin:0 auto;text-align:center}
+.contact-form{margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem;text-align:left}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--dark);background:#fff;border:1.5px solid var(--border-cream);padding:.85rem 1rem;outline:none;transition:border-color .25s;border-radius:6px;-webkit-appearance:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold-light)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted-light)}
+.form-group textarea{resize:vertical;height:110px}
+.form-group select option{background:#fff}
+.btn-submit{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:var(--dark);color:#fff;padding:.9rem 2.5rem;border:none;cursor:pointer;transition:background .3s;border-radius:2px;margin-top:.5rem;align-self:center}
+.btn-submit:hover{background:var(--gold-mid)}
+ 
+/* ─── FOOTER ─── */
+footer{background:var(--forest-dark);padding:3.5rem 2.5rem 2rem}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.08);max-width:1100px;margin:0 auto}
+.foot-brand-name{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;letter-spacing:.05em;display:flex;align-items:center;gap:.4rem}
+.foot-brand-tag{font-family:'DM Sans',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.2rem;font-style:italic}
+.foot-desc{font-family:'DM Sans',sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:.8rem;max-width:220px}
+.foot-col h4{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.1rem}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.foot-col a{font-family:'DM Sans',sans-serif;font-size:.82rem;color:rgba(255,255,255,.55);text-decoration:none;transition:color .25s}
+.foot-col a:hover{color:#fff}
+.foot-socials{display:flex;gap:.8rem;margin-top:1rem}
+.soc{width:34px;height:34px;border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:none;transition:all .25s}
+.soc:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:2rem}
+.foot-copy{font-family:'DM Sans',sans-serif;font-size:.75rem;color:rgba(255,255,255,.3)}
+.scroll-top{width:34px;height:34px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:none;color:rgba(255,255,255,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;font-size:1rem}
+.scroll-top:hover{border-color:rgba(255,255,255,.6);color:#fff}
+ 
+/* ─── MOBILE ─── */
+@media(max-width:768px){
+  nav{padding:.9rem 1.2rem}
+  .nav-links,.nav-right .btn-quote{display:none}
+  .nav-menu-icon{display:block}
+  .hero-content{max-width:100%;padding:1.2rem;padding-top:5rem}
+  .hero-product-jars{right:-10%;width:80%;opacity:.3}
+  .hero-bottom{grid-template-columns:repeat(2,1fr)}
+  .products-grid,.why-inner,.about-inner,.footer-top{grid-template-columns:1fr}
+  .about-right{grid-template-columns:repeat(2,1fr)}
+  .sus-grid,.benefits-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+  .pp-hero-bigtext{display:none}
+  .pp-india-map,.pp-map-label{display:none}
+  .story-step{grid-template-columns:50px 1fr;grid-template-rows:auto auto}
+  .story-step .step-visual{grid-column:1/-1}
+  .pp-info-bar{position:relative;transform:none;left:auto;border-radius:12px;flex-direction:column;margin:0 1rem 2rem}
+  .pp-info-item{border-right:none;border-bottom:1px solid rgba(139,105,20,.2)}
+  .pp-info-item:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+ 
+<!-- CURSOR -->
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+ 
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">Naturéa</div>
+  <div class="ld-bar"><div class="ld-fill" id="ldFill"></div></div>
+  <div class="ld-sub">Nature. Pure. You.</div>
+</div>
+ 
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo" onclick="closeAllPages()">
+    <svg class="nav-logo-icon" viewBox="0 0 28 28" fill="none">
+      <path d="M14 4C10 4 6 8 6 14s4 10 8 10" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M14 4C18 4 22 8 22 14s-4 10-8 10" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="14" cy="14" r="2.5" fill="#8B6914"/>
+      <path d="M14 6c0 3-2 5-4 7" stroke="#8B6914" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Naturéa</span>
+      <span class="nav-logo-tag">Nature. Pure. You.</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="closeAllPages();return false">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#sustainability">Sustainability</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-quote" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+    <button class="nav-menu-icon" aria-label="Menu">☰</button>
+  </div>
+</nav>
+ 
+<!-- ══════════════ HOMEPAGE ══════════════ -->
+<main id="mainSite">
+ 
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-scene">
+        </div>
+      </div>
+      <!-- Water splash effect -->
+      <div class="hero-splash">
+        <div class="splash-drop" style="width:8px;height:8px;background:rgba(100,160,200,.6);left:20px;top:30px;animation-delay:0s"></div>
+        <div class="splash-drop" style="width:6px;height:6px;background:rgba(100,160,200,.5);left:50px;top:10px;animation-delay:.5s"></div>
+        <div class="splash-drop" style="width:10px;height:10px;background:rgba(100,160,200,.4);left:80px;top:40px;animation-delay:1s"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Natural Ingredients, Pure Results</div>
+    <h1 class="hero-title">Nature's Best,<br>For Your <span>Best.</span></h1>
+    <p class="hero-desc">We bring you the finest natural ingredients — Chitosan, Mango Butter &amp; Kokum Butter — sourced from nature, delivered with purity you can trust.</p>
+    <div class="hero-btns">
+      <button class="btn-dark" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+        Explore Products <span class="arr">→</span>
+      </button>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hb-item"><div class="hb-label">Experience</div><div class="hb-val">10+ yrs</div></div>
+    <div class="hb-item"><div class="hb-label">Customers</div><div class="hb-val">50+</div></div>
+    <div class="hb-item"><div class="hb-label">Countries</div><div class="hb-val">30+</div></div>
+    <div class="hb-item"><div class="hb-label">Natural</div><div class="hb-val">100%</div></div>
+  </div>
+</section>
+ 
+<!-- PRODUCTS -->
+<section class="products-sec" id="products">
+  <div style="text-align:center" class="anim">
+    <div class="sec-eyebrow">Our Portfolio</div>
+    <h2 class="sec-title">Explore Our <em>Natural Ingredients</em></h2>
+    <div class="products-divider">
+      <span class="products-divider-line"></span>
+      <span>🔸</span>
+      <span class="products-divider-line"></span>
+    </div>
+    <p class="products-sub">Carefully sourced. Naturally derived. Sustainably delivered.</p>
+  </div>
+  <div class="products-grid" style="margin-top:3rem">
+    <!-- Chitosan -->
+    <div class="prod-card anim" onclick="openPage('chitPage')">
+      <div class="prod-card-img chit-bg">
+        <div class="prod-img-bg chit-bg" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.35">🌊🦀</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;display:flex;align-items:center;justify-content:center;flex-direction:column">
+          <div style="width:70px;height:70px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.5rem;backdrop-filter:blur(4px)">🦀</div>
+        </div>
+        <div class="prod-badge" style="position:absolute;top:1rem;left:1rem">From the Ocean</div>
+        <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem">🌊</div>
+      </div>
+      <div class="prod-card-body">
+        <h3 class="prod-card-name">Chitosan</h3>
+        <p class="prod-card-desc">A natural biopolymer derived from shellfish, known for its exceptional film-forming and conditioning properties.</p>
+        <button class="btn-learn-more">Learn More <span class="arr">→</span></button>
+      </div>
+    </div>
+    <!-- Mango Butter -->
+    <div class="prod-card anim" onclick="openPage('mangoPage')">
+      <div class="prod-card-img mango-bg">
+        <div class="prod-img-bg mango-bg" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.35">🌴🥭</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;display:flex;align-items:center;justify-content:center;flex-direction:column">
+          <div style="width:70px;height:70px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.5rem;backdrop-filter:blur(4px)">🥭</div>
+        </div>
+        <div class="prod-badge" style="position:absolute;top:1rem;left:1rem">From the Tropics</div>
+        <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem">🥭</div>
+      </div>
+      <div class="prod-card-body">
+        <h3 class="prod-card-name">Mango Butter</h3>
+        <p class="prod-card-desc">A rich emollient extracted from mango seeds, deeply moisturizing and perfect for skin and hair care.</p>
+        <button class="btn-learn-more">Learn More <span class="arr">→</span></button>
+      </div>
+    </div>
+    <!-- Kokum Butter -->
+    <div class="prod-card anim" onclick="openPage('kokumPage')">
+      <div class="prod-card-img kokum-bg">
+        <div class="prod-img-bg kokum-bg" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.35">🌲🫐</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;display:flex;align-items:center;justify-content:center;flex-direction:column">
+          <div style="width:70px;height:70px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.5rem;backdrop-filter:blur(4px)">🌸</div>
+        </div>
+        <div class="prod-badge" style="position:absolute;top:1rem;left:1rem">From the Western Ghats</div>
+        <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem">🌸</div>
+      </div>
+      <div class="prod-card-body">
+        <h3 class="prod-card-name">Kokum Butter</h3>
+        <p class="prod-card-desc">A luxurious butter extracted from kokum seeds, known for its soothing and deep repair properties.</p>
+        <button class="btn-learn-more">Learn More <span class="arr">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- WHY CHOOSE -->
+<section class="why-sec" id="why">
+  <div class="why-inner">
+    <div class="anim">
+      <div class="sec-eyebrow">Our Promise</div>
+      <h2 class="sec-title">Why Choose <span>Naturéa?</span></h2>
+      <div class="divider"><div class="divider-line"></div><div class="divider-icon">🌿</div></div>
+      <div class="why-features" style="margin-top:2rem">
+        <div class="why-item">
+          <div class="why-icon">🌱</div>
+          <div>
+            <div class="why-title">100% Natural</div>
+            <p class="why-text">Pure ingredients, straight from nature. Zero synthetic additives, zero compromise.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">♻️</div>
+          <div>
+            <div class="why-title">Sustainable</div>
+            <p class="why-text">Eco-friendly sourcing and recyclable packaging for a better tomorrow.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">✅</div>
+          <div>
+            <div class="why-title">Premium Quality</div>
+            <p class="why-text">Strict quality checks for purity you can trust, from harvest to delivery.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🌍</div>
+          <div>
+            <div class="why-title">Global Delivery</div>
+            <p class="why-text">Delivering nature's best to 30+ countries — wherever you are.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="anim">
+      <div class="why-globe">
+        <span class="globe-emoji">🌍</span>
+        <div class="globe-title">Trusted Globally</div>
+        <p class="globe-sub">Nature's finest, delivered worldwide</p>
+      </div>
+      <div class="why-stats">
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-lbl">Years of Experience</div></div>
+        <div class="stat"><div class="stat-num">50+</div><div class="stat-lbl">Happy Customers</div></div>
+        <div class="stat"><div class="stat-num">30+</div><div class="stat-lbl">Countries Served</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Natural Commitment</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="about-inner">
+    <div class="anim">
+      <div class="sec-eyebrow" style="color:#4CAF50">About Us</div>
+      <h2 class="about-left" style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:1rem">At Naturéa, we believe in the power of nature to heal, nourish and transform.</h2>
+      <p style="font-family:'DM Sans',sans-serif;font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:1.5rem">Our mission is to deliver high-quality, natural ingredients that empower industries and enrich lives. From the ocean floors to Ayurvedic forests, we source the purest bioactive ingredients on Earth.</p>
+      <button class="btn-about">Read More <span>→</span></button>
+    </div>
+    <div class="about-right anim">
+      <div class="ab-stat"><div class="ab-icon">🌱</div><div class="ab-num">10+</div><div class="ab-lbl">Years of Experience</div></div>
+      <div class="ab-stat"><div class="ab-icon">😊</div><div class="ab-num">50+</div><div class="ab-lbl">Happy Customers</div></div>
+      <div class="ab-stat"><div class="ab-icon">🌐</div><div class="ab-num">30+</div><div class="ab-lbl">Countries Served</div></div>
+      <div class="ab-stat"><div class="ab-icon">🌿</div><div class="ab-num">100%</div><div class="ab-lbl">Natural Commitment</div></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SUSTAINABILITY -->
+<section class="sus-sec" id="sustainability">
+  <div class="sus-inner">
+    <div class="anim" style="text-align:center">
+      <div class="sec-eyebrow">Our Planet</div>
+      <h2 class="sec-title">Committed to <em>Sustainability</em></h2>
+    </div>
+    <div class="sus-grid anim">
+      <div class="sus-card">
+        <span class="sus-icon">🌱</span>
+        <div class="sus-name">Ethical Sourcing</div>
+        <p class="sus-text">Every ingredient is harvested with care for local ecosystems and farming communities.</p>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">♻️</span>
+        <div class="sus-name">Zero Waste</div>
+        <p class="sus-text">Our processing converts agricultural by-products into premium ingredients, creating circular value.</p>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">🌍</span>
+        <div class="sus-name">Carbon Neutral</div>
+        <p class="sus-text">We offset 100% of our logistics emissions through verified reforestation partnerships.</p>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">📜</span>
+        <div class="sus-name">Certified Pure</div>
+        <p class="sus-text">ISO certified, Cosmos organic aligned, and third-party tested for complete purity assurance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="contact-inner anim">
+    <div class="sec-eyebrow" style="text-align:center">Get in Touch</div>
+    <h2 class="sec-title" style="text-align:center">Let's <em>Collaborate</em></h2>
+    <form class="contact-form" onsubmit="handleForm(event)">
+      <div class="form-row">
+        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+        <div class="form-group"><input type="email" placeholder="Email Address" required></div>
+      </div>
+      <div class="form-group"><input type="text" placeholder="Company / Brand Name"></div>
+      <div class="form-group">
+        <select>
+          <option value="">Interested Product</option>
+          <option>Chitosan</option>
+          <option>Mango Butter</option>
+          <option>Kokum Butter</option>
+          <option>All Products</option>
+        </select>
+      </div>
+      <div class="form-group"><textarea placeholder="Tell us about your requirements..."></textarea></div>
+      <button type="submit" class="btn-submit">Send Inquiry →</button>
+    </form>
+  </div>
+</section>
+ 
+</main>
+ 
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="foot-brand-name">
+        <svg width="20" height="20" viewBox="0 0 28 28" fill="none"><path d="M14 4C10 4 6 8 6 14s4 10 8 10" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/><path d="M14 4C18 4 22 8 22 14s-4 10-8 10" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="14" r="2.5" fill="#4CAF50"/></svg>
+        Naturéa
+      </div>
+      <div class="foot-brand-tag">Nature. Pure. You.</div>
+      <p class="foot-desc">We bring you the finest natural ingredients, sourced from nature and delivered with purity you can trust.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#" onclick="closeAllPages();return false">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#sustainability">Sustainability</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#" onclick="openPage('chitPage');return false">Chitosan</a></li>
+        <li><a href="#" onclick="openPage('mangoPage');return false">Mango Butter</a></li>
+        <li><a href="#" onclick="openPage('kokumPage');return false">Kokum Butter</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#sustainability">Sustainability</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Certificates</a></li>
+      </ul>
+      <h4 style="margin-top:1.5rem">Stay Connected</h4>
+      <div class="foot-socials">
+        <a href="#" class="soc" aria-label="Instagram">ig</a>
+        <a href="#" class="soc" aria-label="LinkedIn">in</a>
+        <a href="#" class="soc" aria-label="Facebook">fb</a>
+        <a href="#" class="soc" aria-label="Email">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="foot-copy">© 2024 Naturéa. All Rights Reserved.</span>
+    <button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+  </div>
+</footer>
+ 
+<!-- ══════════════════════════════════════
+     CHITOSAN PAGE
+══════════════════════════════════════ -->
+<div class="prod-page" id="chitPage">
+  <nav class="prod-page-nav">
+    <span class="pp-logo">Chitosan</span>
+    <ul class="pp-nav-links">
+      <li><a href="#" onclick="closeAllPages();return false">Home</a></li>
+      <li><a href="#">Abouts</a></li>
+      <li><a href="#" onclick="closeAllPages();document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a></li>
+    </ul>
+    <div class="pp-right">
+      <button class="btn-pp-login">Login</button>
+      <button class="btn-pp-signup">Sign up</button>
+      <button class="btn-close-pp" onclick="closeAllPages()">✕ Back</button>
+    </div>
+  </nav>
+ 
+  <!-- HERO: ocean/underwater scene exactly like reference image 1 -->
+  <div class="pp-hero">
+    <div class="pp-hero-bg">
+
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="videos/chitosan.mp4" type="video/mp4">
+  </video>
+
+    </div>
+    <div class="pp-hero-overlay"></div>
+    <div class="pp-hero-bottom-fade"></div>
+ 
+    <!-- India map outline -->
+    <div class="pp-india-map" style="top:40%;right:5%;transform:translateY(-50%)">
+      <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+        <path d="M45 5 L55 15 L65 20 L70 30 L75 40 L72 50 L78 60 L75 70 L70 80 L65 90 L55 100 L45 105 L38 95 L30 85 L25 70 L28 55 L22 45 L25 32 L32 22 L40 12 Z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="58" r="4" fill="rgba(255,255,255,0.8)"/>
+      </svg>
+    </div>
+    <div class="pp-map-label">Western Ghats,<br>India</div>
+ 
+    <!-- Sparkles -->
+    <div class="pp-sparkles" id="chitSparkles"></div>
+ 
+    <!-- Left content -->
+    <div class="pp-hero-left">
+      <p class="pp-hero-desc">Chitosan is a natural biopolymer derived from marine shellfish shells — antimicrobial, film-forming, and deeply biocompatible.</p>
+      <button class="btn-discover" onclick="document.getElementById('chitPage').querySelector('.pp-story').scrollIntoView({behavior:'smooth'})">Discover Chitosan →</button>
+    </div>
+ 
+    <!-- Bottom info bar -->
+    <div class="pp-info-bar" style="bottom:2rem">
+      <div class="pp-info-item"><span class="pp-info-label">Texture:</span><span class="pp-info-val">Silky, Absorbent</span></div>
+      <div class="pp-info-item"><span class="pp-info-label">Source:</span><span class="pp-info-val">Marine Shellfish</span></div>
+      <div class="pp-info-item"><span class="pp-info-label">Benefits:</span><span class="pp-info-val">Healing, Hydrating</span></div>
+    </div>
+  </div>
+ 
+  <!-- STORY -->
+  <div class="pp-story">
+    <div class="sec-eyebrow">The Journey</div>
+    <h2 class="pp-story-title">From Ocean <em>to Skin</em></h2>
+    <div class="story-steps">
+      <div class="story-step">
+        <div class="step-num">01</div>
+        <div class="step-text">
+          <h3>The <em>Marine World</em></h3>
+          <p>Along India's pristine coasts, shellfish thrive in mineral-rich waters. Their shells — often discarded as waste — contain chitin, the second most abundant natural polysaccharide on Earth.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#0d3a5c,#1a6b8a)">
+          <span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(0,200,255,.4))">🌊</span>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-num">02</div>
+        <div class="step-text">
+          <h3>The <em>Extraction</em></h3>
+          <p>Through precise deacetylation, chitin transforms into chitosan — a remarkable cationic polymer. Our biotech process ensures pharmaceutical-grade purity while respecting the environment.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#0d4a3c,#1a8a6a)">
+          <span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(0,229,255,.5))">🔬</span>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-num">03</div>
+        <div class="step-text">
+          <h3>The <em>Transformation</em></h3>
+          <p>Chitosan's positive charge bonds with skin's negatively charged surface, forming a protective biofilm. It delivers actives deeper, locks moisture, and provides natural antimicrobial defense.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#1a2a5c,#2a4a9a)">
+          <span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(100,150,255,.5))">✨</span>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="pp-benefits">
+    <div class="pp-benefits-inner">
+      <div class="sec-eyebrow">Skin Science</div>
+      <h2 class="pp-story-title">Clinically <em>Proven Benefits</em></h2>
+      <div class="benefits-grid">
+        <div class="ben-card"><div class="ben-icon">💧</div><div class="ben-title">Deep Hydration</div><p class="ben-text">Forms a moisture-locking biofilm that reduces water loss by up to 40%, keeping skin plump.</p></div>
+        <div class="ben-card"><div class="ben-icon">🛡️</div><div class="ben-title">Antimicrobial</div><p class="ben-text">Natural cationic properties inhibit bacterial growth — ideal for acne-prone and sensitive skin.</p></div>
+        <div class="ben-card"><div class="ben-icon">🎬</div><div class="ben-title">Film-Forming</div><p class="ben-text">Creates a smooth biopolymer matrix that improves skin texture and enhances ingredient delivery.</p></div>
+        <div class="ben-card"><div class="ben-icon">⚗️</div><div class="ben-title">Wound Healing</div><p class="ben-text">Accelerates skin regeneration and collagen synthesis for faster healing and reduced scarring.</p></div>
+        <div class="ben-card"><div class="ben-icon">✨</div><div class="ben-title">Hair Conditioning</div><p class="ben-text">Repairs cuticle damage, reduces frizz, and adds luminous shine to all hair types.</p></div>
+        <div class="ben-card"><div class="ben-icon">🌊</div><div class="ben-title">Biocompatible</div><p class="ben-text">100% natural origin, biodegradable, and safe for all skin types including the most sensitive.</p></div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- mini contact footer on product pages -->
+  <div style="background:var(--cream-mid);padding:3rem 2.5rem;text-align:center">
+    <div class="sec-eyebrow">Request a Sample</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--dark);margin-bottom:1rem">Ready to try <em style="color:var(--gold-mid)">Chitosan?</em></h3>
+    <button class="btn-dark" onclick="closeAllPages();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),200)">Get a Quote →</button>
+  </div>
+</div>
+ 
+<!-- ══════════════════════════════════════
+     MANGO BUTTER PAGE
+══════════════════════════════════════ -->
+<div class="prod-page" id="mangoPage">
+  <nav class="prod-page-nav">
+    <span class="pp-logo">Mango Butter</span>
+    <ul class="pp-nav-links">
+      <li><a href="#" onclick="closeAllPages();return false">Home</a></li>
+      <li><a href="#">Abouts</a></li>
+      <li><a href="#" onclick="closeAllPages();document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a></li>
+    </ul>
+    <div class="pp-right">
+      <button class="btn-pp-login">Login</button>
+      <button class="btn-pp-signup" style="background:var(--dark)">Sign up</button>
+      <button class="btn-close-pp" onclick="closeAllPages()">✕ Back</button>
+    </div>
+  </nav>
+ 
+  <!-- HERO: mango/tropical scene exactly like reference image 3 -->
+  <div class="pp-hero">
+    <div class="pp-hero-bg">
+
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="videos/mango.mp4" type="video/mp4">
+  </video>
+    </div>
+    <div class="pp-hero-overlay" style="background:linear-gradient(to right,rgba(0,0,0,.4) 0%,rgba(0,0,0,.05) 45%,transparent 100%)"></div>
+    <div class="pp-hero-bottom-fade" style="background:linear-gradient(to top,#f7f3ec 0%,transparent 100%)"></div>
+ 
+    <div class="pp-india-map" style="top:40%;right:5%;transform:translateY(-50%)">
+      <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+        <path d="M45 5 L55 15 L65 20 L70 30 L75 40 L72 50 L78 60 L75 70 L70 80 L65 90 L55 100 L45 105 L38 95 L30 85 L25 70 L28 55 L22 45 L25 32 L32 22 L40 12 Z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="58" r="4" fill="rgba(255,255,255,0.8)"/>
+      </svg>
+    </div>
+    <div class="pp-map-label">Western Ghats,<br>India</div>
+ 
+    <div class="pp-hero-left">
+      <p class="pp-hero-desc">Mango Butter is a rich emollient cold-pressed from the kernels of Indian Alphonso mangoes — velvety, vitamin-rich, and deeply nourishing for skin and hair.</p>
+      <button class="btn-discover"
+onclick="document.getElementById('mangoPage').querySelector('.pp-story').scrollIntoView({behavior:'smooth'})">
+Discover Mango Butter →
+</button>
+    </div>
+ 
+    <div class="pp-info-bar" style="bottom:2rem">
+      <div class="pp-info-item"><span class="pp-info-label">Texture:</span><span class="pp-info-val">Velvety</span></div>
+      <div class="pp-info-item"><span class="pp-info-label">Source:</span><span class="pp-info-val">Indian Alphonso</span></div>
+      <div class="pp-info-item"><span class="pp-info-label">Benefits:</span><span class="pp-info-val">Deep Hydration</span></div>
+    </div>
+  </div>
+ 
+  <div class="pp-story">
+    <div class="sec-eyebrow">The Journey</div>
+    <h2 class="pp-story-title">From Grove <em>to Glow</em></h2>
+    <div class="story-steps">
+      <div class="story-step">
+        <div class="step-num">01</div>
+        <div class="step-text">
+          <h3>The <em>Mango Grove</em></h3>
+          <p>In the sun-drenched orchards of Ratnagiri and Devgad, the legendary Alphonso mango ripens to perfection. The fertile Konkan coast of Maharashtra produces some of the world's finest mangoes.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#3a2000,#8a5000)"><span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(255,180,0,.5))">🌳</span></div>
+      </div>
+      <div class="story-step">
+        <div class="step-num">02</div>
+        <div class="step-text">
+          <h3>The <em>Seed Harvest</em></h3>
+          <p>After the fruit is savored, the seeds — usually discarded — are carefully collected. Our seed-to-butter program creates economic value for farming communities while eliminating agricultural waste.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#5a3000,#aa7000)"><span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(255,200,50,.5))">🥭</span></div>
+      </div>
+      <div class="story-step">
+        <div class="step-num">03</div>
+        <div class="step-text">
+          <h3>The <em>Golden Butter</em></h3>
+          <p>Cold-pressed using traditional methods with modern refinement, the mango kernel is transformed into a luxuriously smooth butter rich in oleic acid, stearic acid, and vitamins A, C &amp; E.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#7a5000,#c89020)"><span style="font-size:5rem;filter:drop-shadow(0 0 25px rgba(255,220,80,.6))">✨</span></div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="pp-benefits">
+    <div class="pp-benefits-inner">
+      <div class="sec-eyebrow">Skin Science</div>
+      <h2 class="pp-story-title">Golden <em>Benefits</em></h2>
+      <div class="benefits-grid">
+        <div class="ben-card"><div class="ben-icon">🧴</div><div class="ben-title">Deep Moisture</div><p class="ben-text">Penetrates deeply without greasiness — provides long-lasting hydration for the driest skin.</p></div>
+        <div class="ben-card"><div class="ben-icon">☀️</div><div class="ben-title">Vitamin Rich</div><p class="ben-text">Naturally abundant in vitamins A, C &amp; E — powerful antioxidants that brighten and protect.</p></div>
+        <div class="ben-card"><div class="ben-icon">🌟</div><div class="ben-title">Anti-Aging</div><p class="ben-text">High oleic acid content supports skin elasticity and reduces the appearance of fine lines.</p></div>
+        <div class="ben-card"><div class="ben-icon">💆</div><div class="ben-title">Hair Nourishment</div><p class="ben-text">Deeply conditions hair, reduces breakage, and adds extraordinary softness and shine.</p></div>
+        <div class="ben-card"><div class="ben-icon">🌺</div><div class="ben-title">Eczema Relief</div><p class="ben-text">Soothing fatty acid profile provides natural relief for eczema, psoriasis, and dermatitis.</p></div>
+        <div class="ben-card"><div class="ben-icon">💋</div><div class="ben-title">Lip Care</div><p class="ben-text">Perfect for luxury lip balms and treatments — heals and moisturizes chapped lips beautifully.</p></div>
+      </div>
+    </div>
+  </div>
+ 
+  <div style="background:var(--cream-mid);padding:3rem 2.5rem;text-align:center">
+    <div class="sec-eyebrow">Request a Sample</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--dark);margin-bottom:1rem">Ready to try <em style="color:var(--gold-mid)">Mango Butter?</em></h3>
+    <button class="btn-dark" onclick="closeAllPages();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),200)">Get a Quote →</button>
+  </div>
+</div>
+ 
+<!-- ══════════════════════════════════════
+     KOKUM BUTTER PAGE
+══════════════════════════════════════ -->
+<div class="prod-page" id="kokumPage">
+  <nav class="prod-page-nav">
+    <span class="pp-logo">Kokum Butter</span>
+    <ul class="pp-nav-links">
+      <li><a href="#" onclick="closeAllPages();return false">Home</a></li>
+      <li><a href="#">Abouts</a></li>
+      <li><a href="#" onclick="closeAllPages();document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a></li>
+    </ul>
+    <div class="pp-right">
+      <button class="btn-pp-login">Login</button>
+      <button class="btn-pp-signup">Sign up</button>
+      <button class="btn-close-pp" onclick="closeAllPages()">✕ Back</button>
+    </div>
+  </nav>
+ 
+  <!-- HERO: forest/Ayurvedic scene exactly like reference image 2 -->
+  <div class="pp-hero">
+    <div class="pp-hero-bg">
+
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="videos/kokum.mp4" type="video/mp4">
+  </video>
+
+    </div>
+    <div class="pp-hero-overlay" style="background:linear-gradient(to right,rgba(0,0,0,.45) 0%,rgba(0,0,0,.08) 45%,transparent 100%)"></div>
+    <div class="pp-hero-bottom-fade" style="background:linear-gradient(to top,#f7f3ec 0%,transparent 100%)"></div>
+ 
+    <div class="pp-india-map" style="top:40%;right:5%;transform:translateY(-50%)">
+      <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+        <path d="M45 5 L55 15 L65 20 L70 30 L75 40 L72 50 L78 60 L75 70 L70 80 L65 90 L55 100 L45 105 L38 95 L30 85 L25 70 L28 55 L22 45 L25 32 L32 22 L40 12 Z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="58" r="4" fill="rgba(255,255,255,0.8)"/>
+      </svg>
+    </div>
+    <div class="pp-map-label">Western Ghats,<br>India</div>
+ 
+    <div class="pp-hero-left">
+      <p class="pp-hero-desc">Kokum Butter is Ayurveda's most treasured skin butter — extracted from Garcinia indica seeds found in the mystical forests of India's Western Ghats.</p>
+      <button class="btn-discover"
+onclick="document.getElementById('kokumPage').querySelector('.pp-story').scrollIntoView({behavior:'smooth'})">
+Discover Kokum →
+</button>
+    </div>
+ 
+    <div class="pp-info-bar" style="bottom:2rem">
+      <div class="pp-info-item"><span class="pp-info-label">Texture:</span><span class="pp-info-val">Rich, Dense</span></div>
+      <div class="pp-info-item"><span class="pp-info-label">Source:</span><span class="pp-info-val">Western Ghats, India</span></div>
+      <div class="pp-info-item"><span class="pp-info-label">Benefits:</span><span class="pp-info-val">Deep Repair</span></div>
+    </div>
+  </div>
+ 
+  <div class="pp-story">
+    <div class="sec-eyebrow">The Journey</div>
+    <h2 class="pp-story-title">From Ancient Forest <em>to Skin</em></h2>
+    <div class="story-steps">
+      <div class="story-step">
+        <div class="step-num">01</div>
+        <div class="step-text">
+          <h3>The <em>Sacred Tree</em></h3>
+          <p>Deep within the biodiversity-rich Western Ghats — a UNESCO World Heritage site — the Garcinia indica tree bears the kokum fruit. Revered in Ayurveda for millennia, it thrives in the misty forests of Goa, Karnataka, and Maharashtra.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#0a1a05,#1a3a0a)"><span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(100,200,100,.4))">🌲</span></div>
+      </div>
+      <div class="story-step">
+        <div class="step-num">02</div>
+        <div class="step-text">
+          <h3>The <em>Tribal Harvest</em></h3>
+          <p>Tribal communities with generations of forest knowledge carefully harvest kokum during the April–May season. Seeds are extracted and sun-dried in the traditional way — preserving all natural phytonutrients.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#200a30,#4a1a60)"><span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(180,100,255,.4))">🫐</span></div>
+      </div>
+      <div class="story-step">
+        <div class="step-num">03</div>
+        <div class="step-text">
+          <h3>The <em>Pure Butter</em></h3>
+          <p>Cold-pressed at low temperatures, kokum butter is one of nature's hardest butters — stearic-acid rich, oxidatively stable, and uniquely effective for anhydrous formulations and deep skin repair.</p>
+        </div>
+        <div class="step-visual" style="background:linear-gradient(135deg,#1a1000,#4a3000)"><span style="font-size:5rem;filter:drop-shadow(0 0 20px rgba(200,160,80,.5))">✨</span></div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="pp-benefits">
+    <div class="pp-benefits-inner">
+      <div class="sec-eyebrow">Skin Science</div>
+      <h2 class="pp-story-title">Ancient Wisdom, <em>Modern Results</em></h2>
+      <div class="benefits-grid">
+        <div class="ben-card"><div class="ben-icon">🔮</div><div class="ben-title">Deep Repair</div><p class="ben-text">Highest stearic acid of any natural butter — deeply regenerates cracked heels, elbows, and very dry skin.</p></div>
+        <div class="ben-card"><div class="ben-icon">❄️</div><div class="ben-title">Skin-Temp Melt</div><p class="ben-text">Melts exactly at body temperature for a silky, non-greasy application that absorbs fully into skin.</p></div>
+        <div class="ben-card"><div class="ben-icon">🌸</div><div class="ben-title">Anti-Inflammatory</div><p class="ben-text">Garcinol content provides exceptional relief for rosacea, psoriasis, and chronically irritated skin.</p></div>
+        <div class="ben-card"><div class="ben-icon">⚡</div><div class="ben-title">Cell Regeneration</div><p class="ben-text">Promotes cellular turnover and collagen synthesis for firmer, more youthful-looking skin.</p></div>
+        <div class="ben-card"><div class="ben-icon">🧊</div><div class="ben-title">High Stability</div><p class="ben-text">Exceptional oxidative stability — ideal for formulations requiring long shelf life without preservatives.</p></div>
+        <div class="ben-card"><div class="ben-icon">💜</div><div class="ben-title">Lip & Cuticle Care</div><p class="ben-text">Transforms rough, damaged lips and cuticles with a single application — Ayurveda's finest.</p></div>
+      </div>
+    </div>
+  </div>
+ 
+  <div style="background:var(--cream-mid);padding:3rem 2.5rem;text-align:center">
+    <div class="sec-eyebrow">Request a Sample</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--dark);margin-bottom:1rem">Ready to try <em style="color:var(--gold-mid)">Kokum Butter?</em></h3>
+    <button class="btn-dark" onclick="closeAllPages();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),200)">Get a Quote →</button>
+  </div>
+</div>
+ 
+<script>
+// ── Cursor
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animR(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(animR)})();
+document.querySelectorAll('button,a,input,select,textarea').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.opacity='0'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.opacity='.5'});
+});
+ 
+// ── Loader
+const ldFill=document.getElementById('ldFill'),loader=document.getElementById('loader');
+let p=0;
+const li=setInterval(()=>{p+=Math.random()*6+3;if(p>=100){p=100;clearInterval(li);setTimeout(()=>{loader.classList.add('out');initAnims();},300)}ldFill.style.width=p+'%'},55);
+ 
+// ── Navbar scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',window.scrollY>60);
+  checkAnims();
+});
+ 
+// ── Scroll animations
+function initAnims(){checkAnims()}
+function checkAnims(){
+  document.querySelectorAll('#mainSite .anim').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight*.9)el.classList.add('vis');
+  });
+}
+setTimeout(checkAnims,400);
+ 
+// ── Pages
+function openPage(id){
+  document.querySelectorAll('.prod-page').forEach(p=>p.classList.remove('open'));
+  const pg=document.getElementById(id);
+  if(pg){pg.classList.add('open');pg.scrollTop=0}
+}
+function closeAllPages(){
+  document.querySelectorAll('.prod-page').forEach(p=>p.classList.remove('open'));
+}
+ 
+// ── Sea particles for chitosan
+function makeSeaParticles(){
+  const c=document.getElementById('chitSeaParticles');
+  if(!c)return;
+  for(let i=0;i<30;i++){
+    const d=document.createElement('div');
+    const sz=Math.random()*3+1;
+    const x=Math.random()*100,y=Math.random()*100;
+    d.style.cssText=`position:absolute;left:${x}%;top:${y}%;width:${sz}px;height:${sz}px;border-radius:50%;background:rgba(100,220,255,${Math.random()*.6+.2});animation:sparkle-anim ${Math.random()*3+2}s ease-in-out ${Math.random()*3}s infinite`;
+    c.appendChild(d);
+  }
+}
+makeSeaParticles();
+ 
+// ── Sparkles
+function makeSparkles(containerId,count,colors){
+  const c=document.getElementById(containerId);
+  if(!c)return;
+  for(let i=0;i<count;i++){
+    const el=document.createElement('div');
+    const col=colors[Math.floor(Math.random()*colors.length)];
+    el.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*18+10}px;color:${col};animation:sparkle-anim ${Math.random()*2+1.5}s ease-in-out ${Math.random()*3}s infinite;pointer-events:none`;
+    el.textContent='✦';
+    c.appendChild(el);
+  }
+}
+makeSparkles('chitSparkles',12,['rgba(255,255,255,.8)','rgba(100,220,255,.7)','rgba(200,255,255,.6)']);
+ 
+// ── Form
+function handleForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-submit');
+  const orig=btn.textContent;
+  btn.textContent='✓ Message Sent!';
+  btn.style.background='#2a6b3a';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background='';e.target.reset();},3500);
+}
+ 
+// ── Smooth internal links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=a.getAttribute('href');
+    if(t&&t.length>1){
+      const el=document.querySelector(t);
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'})}
+    }
+  });
+});
+</script>
+</body>
+</html>
