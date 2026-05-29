@@ -278,6 +278,37 @@ footer{background:var(--forest-dark);padding:3.5rem 2.5rem 2rem}
   .pp-info-item{border-right:none;border-bottom:1px solid rgba(139,105,20,.2)}
   .pp-info-item:last-child{border-bottom:none}
 }
+.leaf-apos{
+position:relative;
+display:inline-block;
+font-size:.30em;
+color:#5fa63e;
+top:-48px;
+left:-12px;
+transform:rotate(-12deg);
+margin-right:-16px;
+}
+
+.logo-leaf{
+position:relative;
+display:inline-block;
+font-size:.42em;
+color:#5fa63e;
+top:-12px;
+left:-2px;
+transform:rotate(-15deg);
+margin-right:-6px;
+}
+
+.logo-leaf-loader{
+position:relative;
+display:inline-block;
+font-size:.26em;
+color:#5fa63e;
+transform:translate(-8px,-34px) rotate(-12deg);
+margin-right:-16px;
+margin-left:-6px;
+}
 </style>
 </head>
 <body>
@@ -288,8 +319,14 @@ footer{background:var(--forest-dark);padding:3.5rem 2.5rem 2rem}
  
 <!-- LOADER -->
 <div id="loader">
-  <div class="ld-logo">Naturéa</div>
-  <div class="ld-bar"><div class="ld-fill" id="ldFill"></div></div>
+  <div class="ld-logo">
+    Nature<span class="logo-leaf-loader">🌿</span>s
+  </div>
+
+  <div class="ld-bar">
+    <div class="ld-fill" id="ldFill"></div>
+  </div>
+
   <div class="ld-sub">Nature. Pure. You.</div>
 </div>
  
@@ -303,7 +340,9 @@ footer{background:var(--forest-dark);padding:3.5rem 2.5rem 2rem}
       <path d="M14 6c0 3-2 5-4 7" stroke="#8B6914" stroke-width="1" stroke-linecap="round" opacity=".5"/>
     </svg>
     <div class="nav-logo-text">
-      <span class="nav-logo-name">Naturéa</span>
+      <span class="nav-logo-name">
+Nature<span class="logo-leaf">🌿</span>s
+</span>
       <span class="nav-logo-tag">Nature. Pure. You.</span>
     </div>
   </a>
@@ -339,7 +378,10 @@ footer{background:var(--forest-dark);padding:3.5rem 2.5rem 2rem}
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">Natural Ingredients, Pure Results</div>
-    <h1 class="hero-title">Nature's Best,<br>For Your <span>Best.</span></h1>
+<h1 class="hero-title">
+Nature<span class="leaf-apos">🌿</span>s Best,<br>
+For Your <span>Best.</span>
+</h1>
     <p class="hero-desc">We bring you the finest natural ingredients — Chitosan, Mango Butter &amp; Kokum Butter — sourced from nature, delivered with purity you can trust.</p>
     <div class="hero-btns">
       <button class="btn-dark" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
@@ -1023,6 +1065,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
-<script src="naturea-auth-inquiry.js"></script>  
+<script src="naturea-auth-inquiry.js"></script>
 </body>
 </html>
