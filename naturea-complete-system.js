@@ -753,8 +753,6 @@
     </div>`;
     document.getElementById('naCF')?.addEventListener('submit', handleCFSubmit);
   }
-  window.buildContactForm = buildContactForm;
-
   async function handleCFSubmit(e) {
     e.preventDefault();
     const g = id => document.getElementById(id)?.value?.trim() || '';
