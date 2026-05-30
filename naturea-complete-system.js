@@ -710,12 +710,13 @@
      CONTACT FORM REPLACEMENT
   ═══════════════════════════════════════ */
   function buildContactForm() {
-    console.log("buildContactForm called");
-    const sec = document.getElementById('contact');
-    if (!sec) return;
+   const sec = document.getElementById('contact');
+if (!sec) return;
+const old = sec.querySelector('form');
+if (!old) return;
     const s = DB.session;
     const prompt = s ? '' : `<div class="na-cf-prompt">💡 <a onclick="openAuth('login')">Sign in</a> or <a onclick="openAuth('signup')">create an account</a> to auto-track your inquiries.</div>`;
-    sec.innerHTML = `
+    old.outerHTML = `
     <div id="naCFWrap">
       ${prompt}
       <form class="na-cf" id="naCF" novalidate>
