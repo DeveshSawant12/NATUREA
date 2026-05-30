@@ -710,6 +710,7 @@
      CONTACT FORM REPLACEMENT
   ═══════════════════════════════════════ */
   function buildContactForm() {
+    console.log("buildContactForm called");
     const sec = document.getElementById('contact');
     if (!sec) return;
     const s = DB.session;
