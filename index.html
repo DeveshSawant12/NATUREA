@@ -410,57 +410,145 @@ For Your <span>Best.</span>
     <p class="products-sub">Carefully sourced. Naturally derived. Sustainably delivered.</p>
   </div>
   <div class="products-grid" style="margin-top:3rem">
-    <!-- Chitosan -->
-    <div class="prod-card anim" onclick="openPage('chitPage')">
-      <div class="prod-card-img chit-bg">
-        <div class="prod-img-bg chit-bg" style="position:absolute;inset:0"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.35">🌊🦀</div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;display:flex;align-items:center;justify-content:center;flex-direction:column">
-          <div style="width:70px;height:70px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.5rem;backdrop-filter:blur(4px)">🦀</div>
-        </div>
-        <div class="prod-badge" style="position:absolute;top:1rem;left:1rem">From the Ocean</div>
-        <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem">🌊</div>
-      </div>
-      <div class="prod-card-body">
-        <h3 class="prod-card-name">Chitosan</h3>
-        <p class="prod-card-desc">A natural biopolymer derived from shellfish, known for its exceptional film-forming and conditioning properties.</p>
-        <button class="btn-learn-more">Learn More <span class="arr">→</span></button>
-      </div>
+
+<!-- Chitosan -->
+<div class="prod-card anim" onclick="openPage('chitPage')">
+  <div class="prod-card-img chit-bg" style="position:relative;overflow:hidden">
+    <!-- Background Image -->
+    <img 
+      src="images/chitosan-bg.png" 
+      alt="Chitosan"
+      style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      "
+    >
+    <!-- Dark Overlay -->
+    <div 
+      style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(to top,rgba(0,0,0,.35),rgba(0,0,0,.05));
+      "
+    ></div>
+    <!-- Badge -->
+    <div class="prod-badge" style="position:absolute;top:1rem;left:1rem;z-index:2">
+      From the Ocean
     </div>
-    <!-- Mango Butter -->
-    <div class="prod-card anim" onclick="openPage('mangoPage')">
-      <div class="prod-card-img mango-bg">
-        <div class="prod-img-bg mango-bg" style="position:absolute;inset:0"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.35">🌴🥭</div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;display:flex;align-items:center;justify-content:center;flex-direction:column">
-          <div style="width:70px;height:70px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.5rem;backdrop-filter:blur(4px)">🥭</div>
-        </div>
-        <div class="prod-badge" style="position:absolute;top:1rem;left:1rem">From the Tropics</div>
-        <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem">🥭</div>
-      </div>
-      <div class="prod-card-body">
-        <h3 class="prod-card-name">Mango Butter</h3>
-        <p class="prod-card-desc">A rich emollient extracted from mango seeds, deeply moisturizing and perfect for skin and hair care.</p>
-        <button class="btn-learn-more">Learn More <span class="arr">→</span></button>
-      </div>
+    <!-- Icon -->
+    <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem;z-index:2">
+      🦐
     </div>
-    <!-- Kokum Butter -->
-    <div class="prod-card anim" onclick="openPage('kokumPage')">
-      <div class="prod-card-img kokum-bg">
-        <div class="prod-img-bg kokum-bg" style="position:absolute;inset:0"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.35">🌲🫐</div>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem;display:flex;align-items:center;justify-content:center;flex-direction:column">
-          <div style="width:70px;height:70px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:.5rem;backdrop-filter:blur(4px)">🌸</div>
-        </div>
-        <div class="prod-badge" style="position:absolute;top:1rem;left:1rem">From the Western Ghats</div>
-        <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem">🌸</div>
-      </div>
-      <div class="prod-card-body">
-        <h3 class="prod-card-name">Kokum Butter</h3>
-        <p class="prod-card-desc">A luxurious butter extracted from kokum seeds, known for its soothing and deep repair properties.</p>
-        <button class="btn-learn-more">Learn More <span class="arr">→</span></button>
-      </div>
+  </div>
+  <div class="prod-card-body">
+    <h3 class="prod-card-name">Chitosan</h3>
+    <p class="prod-card-desc">
+      A natural biopolymer derived from shellfish, known for its exceptional film-forming and conditioning properties.
+    </p>
+    <button class="btn-learn-more">
+      Learn More <span class="arr">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- Mango Butter -->
+<div class="prod-card anim" onclick="openPage('mangoPage')">
+  <div class="prod-card-img mango-bg" style="position:relative;overflow:hidden">
+    <!-- Background Image -->
+    <img 
+      src="images/mango-bg.png" 
+      alt="Mango Butter"
+      style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      "
+    >
+    <!-- Dark Overlay -->
+    <div 
+      style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(to top,rgba(0,0,0,.30),rgba(0,0,0,.05));
+      "
+    ></div>
+    <!-- Badge -->
+    <div class="prod-badge" style="position:absolute;top:1rem;left:1rem;z-index:2">
+      From the Tropics
     </div>
+    <!-- Icon -->
+    <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem;z-index:2">
+      🥭
+    </div>
+  </div>
+  <div class="prod-card-body">
+    <h3 class="prod-card-name">Mango Butter</h3>
+    <p class="prod-card-desc">
+      A rich emollient extracted from mango seeds, deeply moisturizing and perfect for skin and hair care.
+    </p>
+    <button class="btn-learn-more">
+      Learn More <span class="arr">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- Kokum Butter -->
+<div class="prod-card anim" onclick="openPage('kokumPage')">
+  
+  <div class="prod-card-img kokum-bg" style="position:relative;overflow:hidden">
+
+    <!-- Background Image -->
+    <img 
+      src="images/kokum-bg.png" 
+      alt="Kokum Butter"
+      style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      "
+    >
+
+    <!-- Dark Overlay -->
+    <div 
+      style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(to top,rgba(0,0,0,.30),rgba(0,0,0,.05));
+      "
+    ></div>
+
+    <!-- Badge -->
+    <div class="prod-badge" style="position:absolute;top:1rem;left:1rem;z-index:2">
+      From the Western Ghats
+    </div>
+
+    <!-- Icon -->
+    <div class="prod-icon-badge" style="position:absolute;top:1rem;right:1rem;z-index:2">
+      🫐
+    </div>
+
+  </div>
+
+  <div class="prod-card-body">
+    <h3 class="prod-card-name">Kokum Butter</h3>
+
+    <p class="prod-card-desc">
+      A luxurious butter extracted from kokum seeds, known for its soothing and deep repair properties.
+    </p>
+
+    <button class="btn-learn-more">
+      Learn More <span class="arr">→</span>
+    </button>
+  </div>
+
+</div>
   </div>
 </section>
  
@@ -763,6 +851,7 @@ For Your <span>Best.</span>
     <button class="btn-dark" onclick="closeAllPages();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),200)">Get a Quote →</button>
   </div>
 </div>
+
  
 <!-- ══════════════════════════════════════
      MANGO BUTTER PAGE
@@ -1011,6 +1100,8 @@ function openPage(id){
   document.querySelectorAll('.prod-page').forEach(p=>p.classList.remove('open'));
   const pg=document.getElementById(id);
   if(pg){pg.classList.add('open');pg.scrollTop=0}
+  // Update product page buttons based on login state
+  setTimeout(()=>updateProductPageNavBtns(), 50);
 }
 function closeAllPages(){
   document.querySelectorAll('.prod-page').forEach(p=>p.classList.remove('open'));
@@ -1065,6 +1156,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
-<script src="naturea-complete-system.js"></script>
+<script src="naturea-auth-inquiry.js"></script>
 </body>
 </html>
