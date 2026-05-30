@@ -21,7 +21,7 @@
 
     // ── Admin ──
     ADMIN_EMAIL: 'deveshsawant564@gmail.com',  // ← your email
-    ADMIN_PASSWORD: 'Naturea@2005',       // ← change this!
+    ADMIN_PASSWORD: 'Nature@2005',       // ← change this!
   };
 
   /* ═══════════════════════════════════════
