@@ -14,14 +14,14 @@
   const CONFIG = {
     // ── EmailJS (free tier, 200 emails/month) ──
     // Sign up at https://emailjs.com → get these 3 values
-    EMAILJS_PUBLIC_KEY: 'YOUR_EMAILJS_PUBLIC_KEY',   // Account > API Keys
-    EMAILJS_SERVICE_ID: 'YOUR_SERVICE_ID',            // Email Services tab
-    EMAILJS_TEMPLATE_INQUIRY: 'YOUR_TEMPLATE_ID',     // Email Templates tab
-    EMAILJS_TEMPLATE_CONFIRM: 'YOUR_CONFIRM_TEMPLATE_ID', // confirmation to user
+    EMAILJS_PUBLIC_KEY: 'STXWDF3PRoosbvX8P',   // Account > API Keys
+    EMAILJS_SERVICE_ID: 'service_f2l9kif',            // Email Services tab
+    EMAILJS_TEMPLATE_INQUIRY: 'template_79bvv6e',     // Email Templates tab
+    EMAILJS_TEMPLATE_CONFIRM: 'template_tccti3p', // confirmation to user
 
     // ── Admin ──
-    ADMIN_EMAIL: 'deveshsawant12@gmail.com',  // ← your email
-    ADMIN_PASSWORD: 'naturea@admin2024',       // ← change this!
+    ADMIN_EMAIL: 'deveshsawant564@gmail.com',  // ← your email
+    ADMIN_PASSWORD: 'Naturea@2005',       // ← change this!
   };
 
   /* ═══════════════════════════════════════
