@@ -33,11 +33,16 @@ body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--dark);overflow
 /* ─── NAV ─── */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;transition:all .4s ease;background:transparent}
 nav.solid{background:rgba(247,243,236,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-cream);box-shadow:0 2px 20px rgba(0,0,0,.04)}
-.nav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none}
-.nav-logo-icon{width:28px;height:28px}
-.nav-logo-text{display:flex;flex-direction:column;line-height:1}
+.nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+.nav-logo-img{
+  width:60px;
+  height:60px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.5}
 .nav-logo-name{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--dark);letter-spacing:.05em}
-.nav-logo-tag{font-family:'DM Sans',sans-serif;font-size:.6rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+.nav-logo-tag{font-family:'Lora',sans-serif;font-size:.6rem;color:#062813;letter-spacing:.15em;text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
 .nav-links a{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.08em;color:var(--dark-mid);text-decoration:none;transition:color .25s}
 .nav-links a:hover{color:var(--gold)}
@@ -52,7 +57,7 @@ nav.solid{background:rgba(247,243,236,.96);backdrop-filter:blur(16px);border-bot
   position:absolute;
   inset:0;
 
-  background-image:url('images/dev.jpg');
+  background-image:url('images/rp.jpg');
   background-size: 100% 100%;
   background-position:center;
   background-repeat:no-repeat;
@@ -74,8 +79,8 @@ nav.solid{background:rgba(247,243,236,.96);backdrop-filter:blur(16px);border-bot
 .btn-dark:hover{background:var(--gold-mid)}
 .btn-dark .arr{transition:transform .3s}
 .btn-dark:hover .arr{transform:translateX(4px)}
-.hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border-top:1px solid var(--border-cream);display:grid;grid-template-columns:repeat(4,1fr)}
-.hb-item{padding:1.2rem 1.8rem;display:flex;flex-direction:column;gap:.3rem;border-right:1px solid var(--border-cream)}
+.hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;background:rgba(255,255,255,.7);backdrop-filter:blur(7px);border-top:1px solid var(--border-cream);display:grid;grid-template-columns:repeat(4,1fr)}
+.hb-item{padding:.3rem 1.8rem;display:flex;flex-direction:column;gap:.3rem;border-right:1px solid var(--border-cream)}
 .hb-item:last-child{border-right:none}
 .hb-label{font-family:'Syne',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .hb-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold-mid)}
@@ -87,7 +92,7 @@ nav.solid{background:rgba(247,243,236,.96);backdrop-filter:blur(16px);border-bot
 .sec-title em{font-style:italic;color:var(--gold-mid)}
 .sec-title span{color:var(--gold-mid)}
 .divider{display:flex;align-items:center;gap:.8rem;margin:.8rem 0 .5rem}
-.divider-line{width:30px;height:1px;background:var(--gold-light)}
+.divider-line{width:470px;height:1px;background:var(--gold-light)}
 .divider-icon{color:var(--gold-light);font-size:.9rem}
 .anim{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
 .anim.vis{opacity:1;transform:none}
@@ -245,7 +250,7 @@ footer{background:var(--forest-dark);padding:3.5rem 2.5rem 2rem}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.08);max-width:1100px;margin:0 auto}
 .foot-brand-name{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;letter-spacing:.05em;display:flex;align-items:center;gap:.4rem}
 .foot-brand-tag{font-family:'DM Sans',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.2rem;font-style:italic}
-.foot-desc{font-family:'DM Sans',sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:.8rem;max-width:220px}
+.foot-desc{font-family:'DM Sans',sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7;margin-top:.8rem;max-width:350px}
 .foot-col h4{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.1rem}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
 .foot-col a{font-family:'DM Sans',sans-serif;font-size:.82rem;color:rgba(255,255,255,.55);text-decoration:none;transition:color .25s}
@@ -309,6 +314,47 @@ transform:translate(-8px,-34px) rotate(-12deg);
 margin-right:-16px;
 margin-left:-6px;
 }
+.sec-logo-leaf{
+  position:relative;
+  display:inline-block;
+  font-size:.30em;
+  color:#5fa63e;
+  top:-28px;
+  left:-6px;
+  transform:rotate(-12deg);
+  margin-right:-10px;
+}
+.footer-logo{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+.footer-company-name{
+    font-family:'Playfair Display', serif;
+    font-size:1.5rem;
+    font-weight:700;
+    color:#fff;
+    line-height:1;
+}
+.foot-brand-name{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.footer-leaf{
+    position:relative;
+    display:inline-block;
+    font-size:.38em;
+    color:#5fa63e;
+
+    top:-2.0em;
+    left:-0.16em;
+
+    transform:rotate(-9deg);
+
+    margin-right:-1.0em;
+}
 </style>
 </head>
 <body>
@@ -320,32 +366,34 @@ margin-left:-6px;
 <!-- LOADER -->
 <div id="loader">
   <div class="ld-logo">
-    Nature<span class="logo-leaf-loader">🌿</span>s
+    Siddhi Enterprise<span class="logo-leaf-loader">🌿</span>s
   </div>
 
   <div class="ld-bar">
     <div class="ld-fill" id="ldFill"></div>
   </div>
 
-  <div class="ld-sub">Nature. Pure. You.</div>
+  <div class="ld-sub">Where Science Inspired by Nature</div>
 </div>
  
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo" onclick="closeAllPages()">
-    <svg class="nav-logo-icon" viewBox="0 0 28 28" fill="none">
-      <path d="M14 4C10 4 6 8 6 14s4 10 8 10" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M14 4C18 4 22 8 22 14s-4 10-8 10" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="14" cy="14" r="2.5" fill="#8B6914"/>
-      <path d="M14 6c0 3-2 5-4 7" stroke="#8B6914" stroke-width="1" stroke-linecap="round" opacity=".5"/>
-    </svg>
-    <div class="nav-logo-text">
-      <span class="nav-logo-name">
-Nature<span class="logo-leaf">🌿</span>s
-</span>
-      <span class="nav-logo-tag">Nature. Pure. You.</span>
-    </div>
-  </a>
+<a href="#" class="nav-logo" onclick="closeAllPages()">
+
+  <img src="images/siddhi-logo.png"
+       alt="Siddhi Enterprises"
+       class="nav-logo-img">
+
+  <div class="nav-logo-text">
+    <span class="nav-logo-name">
+      Siddhi Enterprise<span class="logo-leaf">🌿</span>s
+    </span>
+    <span class="nav-logo-tag">
+      Where Science Inspired by Nature
+    </span>
+  </div>
+
+</a>
   <ul class="nav-links">
     <li><a href="#" onclick="closeAllPages();return false">Home</a></li>
     <li><a href="#products">Products</a></li>
@@ -382,7 +430,7 @@ Nature<span class="logo-leaf">🌿</span>s
 Nature<span class="leaf-apos">🌿</span>s Best,<br>
 For Your <span>Best.</span>
 </h1>
-    <p class="hero-desc">We bring you the finest natural ingredients — Chitosan, Mango Butter & Kokum Butter sourced from nature, delivered with purity you can trust.</p>
+    <p class="hero-desc">We bring you the finest natural ingredients — Chitosan, Mango Butter, Kokum Butter,Kokum Extract,Turmeric Powder,Essential Oils & Vegan Food  sourced from nature, delivered with purity you can trust.</p>
     <div class="hero-btns">
       <button class="btn-dark" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
         Explore Products <span class="arr">→</span>
@@ -557,8 +605,14 @@ For Your <span>Best.</span>
   <div class="why-inner">
     <div class="anim">
       <div class="sec-eyebrow">Our Promise</div>
-      <h2 class="sec-title">Why Choose <span>Naturéa?</span></h2>
-      <div class="divider"><div class="divider-line"></div><div class="divider-icon">🌿</div></div>
+      <h2 class="sec-title">
+  Why Choose 
+  <br>
+  <span>
+    Siddhi Enterprise<span class="sec-logo-leaf">🌿</span>s
+  </span>
+</h2>
+      <div class="divider"><div class="divider-line"></div></div>
       <div class="why-features" style="margin-top:2rem">
         <div class="why-item">
           <div class="why-icon">🌱</div>
@@ -611,7 +665,7 @@ For Your <span>Best.</span>
   <div class="about-inner">
     <div class="anim">
       <div class="sec-eyebrow" style="color:#4CAF50">About Us</div>
-      <h2 class="about-left" style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:1rem">At Naturéa, we believe in the power of nature to heal, nourish and transform.</h2>
+      <h2 class="about-left" style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:1rem">At Siddhi Enterprises  , we believe in the power of nature to heal, nourish and transform.</h2>
       <p style="font-family:'DM Sans',sans-serif;font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:1.5rem">Our mission is to deliver high-quality, natural ingredients that empower industries and enrich lives. From the ocean floors to Ayurvedic forests, we source the purest bioactive ingredients on Earth.</p>
       <button class="btn-about">Read More <span>→</span></button>
     </div>
@@ -688,12 +742,20 @@ For Your <span>Best.</span>
 <footer>
   <div class="footer-top">
     <div>
-      <div class="foot-brand-name">
-        <svg width="20" height="20" viewBox="0 0 28 28" fill="none"><path d="M14 4C10 4 6 8 6 14s4 10 8 10" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/><path d="M14 4C18 4 22 8 22 14s-4 10-8 10" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="14" r="2.5" fill="#4CAF50"/></svg>
-        Naturéa
-      </div>
-      <div class="foot-brand-tag">Nature. Pure. You.</div>
-      <p class="foot-desc">We bring you the finest natural ingredients, sourced from nature and delivered with purity you can trust.</p>
+<div class="foot-brand-name">
+  <img src="images/siddhi-logo.png"
+       alt="Siddhi Enterprises"
+       class="footer-logo">
+  <div>
+    <div class="footer-company-name">
+      Siddhi Enterprise<span class="footer-leaf">🌿</span>s
+    </div>
+    <div class="foot-brand-tag">
+      Where Science Inspired by Nature
+    </div>
+  </div>
+</div>
+      <p class="foot-desc">Delivering premium natural ingredients through ethical sourcing, uncompromising quality, and a commitment to sustainability for businesses around the world.</p>
     </div>
     <div class="foot-col">
       <h4>Quick Links</h4>
@@ -730,7 +792,7 @@ For Your <span>Best.</span>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="foot-copy">© 2026 Naturéa. All Rights Reserved.</span>
+    <span class="foot-copy">© 2026 Siddhi Enterprises. All Rights Reserved.</span>
     <button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
   </div>
 </footer>
